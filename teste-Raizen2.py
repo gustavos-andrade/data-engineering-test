@@ -4,6 +4,8 @@ import numpy as np
 
 import datetime
 
+import tabulate
+
 # First, is important study the dataset and structure all information for Python. In this case, one can not
 # extract information from a Excel Pivot Table. Therefore, it is necessary show details of the Pivot Table
 # in Excel and organize all information in a dataset to prepare for Python
@@ -61,7 +63,18 @@ diesel = diesel.rename(columns = {'COMBUSTÍVEL':'product','UNIDADE':'unit','VOL
 
 diesel = diesel[['year_month', 'uf', 'product', 'unit', 'volume', 'created_at']]; # Putting columns in desired order
 
+oil_uf = oil_dev.groupby(['uf','product'])['volume'].sum()
+
+diesel_uf = diesel.groupby(['uf','product'])['volume'].sum()
+
+print('Oil Derivate Fuels')      
 print(oil_dev)
-
+print('------------------------------------')
+print('Diesel')
 print(diesel)
-
+print('------------------------------------')
+print('Oil Derivate Fuels By UF and Product')
+print(oil_uf)
+print('------------------------------------')
+print('Diesel By UF and Product')
+print(diesel_uf)
